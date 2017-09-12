@@ -1,10 +1,9 @@
 TERMUX_PKG_HOMEPAGE="https://www.musicpd.org"
 TERMUX_PKG_DESCRIPTION="music player daemon"
-TERMUX_PKG_VERSION=0.20.8
-TERMUX_PKG_REVISION=1
+TERMUX_PKG_VERSION=0.20.9
+TERMUX_PKG_SHA256=9c3eb601f0f8b2591c6398fc2a91d9c88643d4850363e9d0dbf545437516a9e8
 TERMUX_PKG_SRCURL=https://github.com/MusicPlayerDaemon/MPD/archive/v$TERMUX_PKG_VERSION.tar.gz
 TERMUX_PKG_FOLDERNAME=MPD-$TERMUX_PKG_VERSION
-TERMUX_PKG_SHA256=b3ced73b44cf432ac8906deeb803e69235c1286b34c6986029ecf4fe8e351128
 TERMUX_PKG_DEPENDS="libcurl, libid3tag, libopus, libevent, fftw, libpulseaudio, libmpdclient, boost, openal-soft, libvorbis, libsqlite, ffmpeg"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --disable-alsa
@@ -47,8 +46,8 @@ termux_step_make_install () {
 	# Work around issues on devices having ffmpeg libraries
 	# in a system vendor dir, reported by live_the_dream on #termux:
 	local FFMPEG_LIBS="" lib
-	# gnustl_shared needs to go first in every c++ app that uses audio directly.
-	for lib in gnustl_shared curl ssl event opus vorbis avcodec avfilter avformat avutil postproc swresample swscale sqlite3; do
+	# c++_shared needs to go first in every c++ app that uses audio directly.
+	for lib in c++_shared curl ssl event opus vorbis avcodec avfilter avformat avutil postproc swresample swscale sqlite3; do
 		if [ -n "$FFMPEG_LIBS" ]; then FFMPEG_LIBS+=":"; fi
 		FFMPEG_LIBS+="$TERMUX_PREFIX/lib/lib${lib}.so"
 	done
@@ -60,5 +59,6 @@ termux_step_make_install () {
 }
 
 termux_step_create_debscripts() {
+	echo "#!$TERMUX_PREFIX/bin/sh" > postinst
 	echo 'mkdir -p $HOME/.mpd/playlists' >> postinst
 }
