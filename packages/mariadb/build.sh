@@ -2,7 +2,7 @@ TERMUX_PKG_HOMEPAGE=https://mariadb.org
 TERMUX_PKG_DESCRIPTION="A drop-in replacement for mysql server"
 TERMUX_PKG_VERSION=10.2.6
 TERMUX_PKG_REVISION=1
-TERMUX_PKG_SRCURL=https://ftp.osuosl.org/pub/mariadb/mariadb-$TERMUX_PKG_VERSION/source/mariadb-$TERMUX_PKG_VERSION.tar.gz
+TERMUX_PKG_SRCURL=http://archive.mariadb.org/mariadb-$TERMUX_PKG_VERSION/source/mariadb-$TERMUX_PKG_VERSION.tar.gz
 TERMUX_PKG_SHA256=c385c76e40d6e5f0577eba021805da5f494a30c9ef51884baefe206d5658a2e5
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -DBISON_EXECUTABLE=`which bison`
@@ -52,7 +52,7 @@ termux_step_host_build () {
 	cmake -G "Unix Makefiles" \
 		$TERMUX_PKG_SRCDIR \
 		-DWITH_SSL=bundled \
-		-DCMAKE_BUILD_TYPE=Release
+		-DCMAKE_BUILD_TYPE=Release -DGNUTLS_LIBRARY=$TERMUX_PREFIX/lib/libgnutls.so -DGNUTLS_INCLUDE_DIR=$TERMUX_PREFIX/include/gnutls
 	make -j $TERMUX_MAKE_PROCESSES import_executables
 }
 

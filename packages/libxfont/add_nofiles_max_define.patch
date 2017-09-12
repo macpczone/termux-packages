@@ -1,0 +1,11 @@
+diff -ur libXfont-1.5.1.orig/src/fc/fslibos.h libXfont-1.5.1/src/fc/fslibos.h
+--- libXfont-1.5.1.orig/src/fc/fslibos.h	2015-03-17 15:12:29.000000000 +0000
++++ libXfont-1.5.1/src/fc/fslibos.h	2017-09-12 00:27:50.000000000 +0100
+@@ -37,6 +37,7 @@
+ 
+ #include <X11/Xtrans/Xtrans.h>
+ 
++#define NOFILES_MAX 150
+ #ifndef WIN32
+ 
+ /*

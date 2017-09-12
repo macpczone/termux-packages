@@ -25,7 +25,7 @@ termux_download() {
 	echo "Downloading ${URL}"
 	local TRYMAX=6
 	for try in $(seq 1 $TRYMAX); do
-		if curl -L --fail --retry 2 -o "$TMPFILE" "$URL"; then
+		if curl -k -L --fail --retry 2 -o "$TMPFILE" "$URL"; then
 			local ACTUAL_CHECKSUM
 			ACTUAL_CHECKSUM=$(sha256sum "$TMPFILE" | cut -f 1 -d ' ')
 			if [ $# = 3 ] && [ -n "$3" ]; then
@@ -485,7 +485,7 @@ termux_step_setup_toolchain() {
 		# https://developer.android.com/ndk/guides/standalone_toolchain.html#abi_compatibility:
 		# "We recommend using the -mthumb compiler flag to force the generation of 16-bit Thumb-2 instructions".
 		# With r13 of the ndk ruby 2.4.0 segfaults when built on arm with clang without -mthumb.
-		CFLAGS+=" -march=armv7-a -mfpu=neon -mfloat-abi=softfp -mthumb"
+		CFLAGS+=" -Ofast -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=softfp -mthumb"
 		LDFLAGS+=" -march=armv7-a -Wl,--fix-cortex-a8"
 	elif [ "$TERMUX_ARCH" = "i686" ]; then
 		# From $NDK/docs/CPU-ARCH-ABIS.html:

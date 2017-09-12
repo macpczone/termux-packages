@@ -37,12 +37,36 @@ _sums=( 505d9b12a7093389e67a925dfda6346bde26d114c67f0cdca7aeda6e5d3344f4
 	e444028656e0767e2eddc6d9aca462b16a2be75a47244dbc199b2c44eca87e5a )
 
 termux_step_post_extract_package () {
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/mike/.termux-build/_lib/15.1-arm-21-v4/bin
+    export LDFLAGS=-L/data/data/com.termux/files/usr/lib
+    export AS=arm-linux-androideabi-clang
+    export CC=arm-linux-androideabi-clang
+    export CXX=arm-linux-androideabi-clang++
+    export AR=arm-linux-androideabi-ar
+    export CPP=arm-linux-androideabi-cpp
+    export CC_FOR_BUILD=gcc
+    export LD=arm-linux-androideabi-ld
+    export OBJDUMP=arm-linux-androideabi-objdump
+    export PKG_CONFIG=/home/mike/.termux-build/_lib/15.1-arm-21-v4/bin/arm-linux-androideabi-pkg-config
+    export RANLIB=arm-linux-androideabi-ranlib
+    export READELF=arm-linux-androideabi-readelf
+    export STRIP=arm-linux-androideabi-strip
+    LDFLAGS+=' -march=armv7-a -Wl,--fix-cortex-a8'
+    export 'CXXFLAGS= -Ofast -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=softfp -mthumb -Os'
+    export CPPFLAGS=-I/data/data/com.termux/files/usr/include
+
+    export ac_cv_func_getpwent=no
+    export ac_cv_func_getpwnam=no
+    export ac_cv_func_getpwuid=no
+    export MKFONTDIR=/usr/bin/mkfontdir
+    export BDFTOPCF=/usr/bin/bdftopcf
+    export PKG_CONFIG_LIBDIR=/data/data/com.termux/files/usr/lib/pkgconfig
 	for fontindex in "${!_font[@]}"; do
 		file=font-${_font[fontindex]}.tar.bz2
 		test ! -f $TERMUX_PKG_CACHEDIR/$file && termux_download $_url/$file $TERMUX_PKG_CACHEDIR/$file ${_sums[fontindex]}
 		tar xf $TERMUX_PKG_CACHEDIR/$file -C $TERMUX_PKG_SRCDIR
 		cd $TERMUX_PKG_SRCDIR/font-${_font[fontindex]}
-		./configure --prefix $TERMUX_PREFIX --host $TERMUX_HOST_PLATFORM --with-fontdir=$TERMUX_PREFIX/share/fonts/misc
+		./configure --prefix=$TERMUX_PREFIX --host=$TERMUX_HOST_PLATFORM --with-fontdir=$TERMUX_PREFIX/share/fonts/misc
 		make install
 	done
 }

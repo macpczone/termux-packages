@@ -3,7 +3,7 @@ TERMUX_PKG_DESCRIPTION="Library for text-based user interfaces in a terminal-ind
 _MAJOR_VERSION=6.0
 _MINOR_VERSION=20170610
 TERMUX_PKG_VERSION=${_MAJOR_VERSION}.${_MINOR_VERSION}
-TERMUX_PKG_SRCURL=ftp://invisible-island.net/ncurses/current/ncurses-${_MAJOR_VERSION}-${_MINOR_VERSION}.tgz
+TERMUX_PKG_SRCURL=http://invisible-mirror.net/archives/ncurses/current/ncurses-${_MAJOR_VERSION}-${_MINOR_VERSION}.tgz
 TERMUX_PKG_SHA256=4c196bd0f1bf0ce643c1547cc7fc25cee713d21299a660eeb9b5dfa8becacb45
 # --without-normal disables static libraries:
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="

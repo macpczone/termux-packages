@@ -1,7 +1,7 @@
 TERMUX_PKG_HOMEPAGE=http://lynx.isc.org/
 TERMUX_PKG_DESCRIPTION="The text web browser"
 TERMUX_PKG_VERSION=2.8.9dev.13
-TERMUX_PKG_SRCURL=ftp://invisible-island.net/lynx/tarballs/lynx${TERMUX_PKG_VERSION}.tar.bz2
+TERMUX_PKG_SRCURL=http://invisible-mirror.net/archives/lynx/tarballs/lynx${TERMUX_PKG_VERSION}.tar.bz2
 TERMUX_PKG_SHA256=c72e17b226c2397096eb4e736811634b83764e560fa99844b60d281da141541c
 TERMUX_PKG_DEPENDS="ncurses, openssl, libbz2, libidn"
 TERMUX_PKG_FOLDERNAME="lynx$TERMUX_PKG_VERSION"

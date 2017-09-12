@@ -1,6 +1,6 @@
 TERMUX_PKG_HOMEPAGE=http://invisible-island.net/xterm
 TERMUX_PKG_VERSION=330
-TERMUX_PKG_SRCURL=ftp://invisible-island.net/xterm/xterm-$TERMUX_PKG_VERSION.tgz
+TERMUX_PKG_SRCURL=http://invisible-mirror.net/archives/xterm/xterm-$TERMUX_PKG_VERSION.tgz
 TERMUX_PKG_SHA256=7aeef9f29f6b95e09f481173c8c3053357bf5ffe162585647f690fd1707556df
 TERMUX_PKG_DEPENDS="libxaw, ncurses, libxkbfile"
 TERMUX_PKG_MAINTAINER="Vishal Biswas @vishalbiswas"
